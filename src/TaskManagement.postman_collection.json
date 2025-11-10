@@ -1,0 +1,121 @@
+{
+  "info": {
+    "name": "Task Management System",
+    "_postman_id": "12345-abcdef-67890",
+    "description": "Postman collection for Task Management System API with Admin registration",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Users - Register Admin",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Admin\",\n  \"email\": \"admin@example.com\",\n  \"password\": \"admin123\",\n  \"role\": \"Admin\"\n}"
+        },
+        "url": {
+          "raw": "http://localhost:5000/api/auth/register",
+          "protocol": "http",
+          "host": ["localhost"],
+          "port": "5000",
+          "path": ["api","auth","register"]
+        }
+      }
+    },
+    {
+      "name": "Auth - Login",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"admin@example.com\",\n  \"password\": \"admin123\"\n}"
+        },
+        "url": { "raw": "http://localhost:5000/api/auth/login", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api","auth","login"] }
+      }
+    },
+    {
+      "name": "Users - Create Manager",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Manager1\",\n  \"email\": \"manager1@example.com\",\n  \"password\": \"manager123\",\n  \"role\": \"Manager\"\n}"
+        },
+        "url": { "raw": "http://localhost:5000/api/users", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api","users"] }
+      }
+    },
+    {
+      "name": "Users - Create User",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{accessToken}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"User1\",\n  \"email\": \"user1@example.com\",\n  \"password\": \"user123\",\n  \"role\": \"User\"\n}"
+        },
+        "url": { "raw": "http://localhost:5000/api/users", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api","users"] }
+      }
+    },
+    {
+      "name": "Tasks - Create Task",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{managerToken}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"title\": \"Prepare Report\",\n  \"description\": \"Complete the monthly report\",\n  \"assignedTo\": \"{{userId}}\",\n  \"priority\": \"high\",\n  \"dueDate\": \"2025-11-11T12:00:00.000Z\"\n}"
+        },
+        "url": { "raw": "http://localhost:5000/api/tasks", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api","tasks"] }
+      }
+    },
+    {
+      "name": "Tasks - List Tasks",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{userToken}}" }
+        ],
+        "url": { "raw": "http://localhost:5000/api/tasks", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api","tasks"] }
+      }
+    },
+    {
+      "name": "Tasks - Update Status",
+      "request": {
+        "method": "PATCH",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{userToken}}" }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"status\": \"completed\"\n}"
+        },
+        "url": { "raw": "http://localhost:5000/api/tasks/{{taskId}}", "protocol": "http", "host": ["localhost"], "port": "5000", "path": ["api","tasks","{{taskId}}"] }
+      }
+    }
+  ],
+  "variable": [
+    { "key": "accessToken", "value": "" },
+    { "key": "managerToken", "value": "" },
+    { "key": "userToken", "value": "" },
+    { "key": "userId", "value": "" },
+    { "key": "taskId", "value": "" }
+  ]
+}
