@@ -1,38 +1,60 @@
-Advanced Task Management System - REST API
-Project Overview
+# Advanced Task Management System - REST API
 
-The Advanced Task Management System is a REST API built with Node.js, Express, and MongoDB. It provides:
+## Project Overview
 
-Multiple user roles: Admin, Manager, User
+The **Advanced Task Management System** is a RESTful API built using **Node.js**, **Express**, and **MongoDB**. It provides a robust task management solution with role-based access control, JWT authentication, and automated task reminders.
 
-Role-based access control for tasks
+### Key Features
 
-JWT authentication and session management
+- **Multiple User Roles**: Admin, Manager, User
+- **Role-Based Access Control** for tasks and operations
+- **JWT Authentication** with session management
+- **Task Management**:
+  - Create, assign, update, and delete tasks
+  - Update task status
+  - Priority and due date management
+- **Automated Email Reminders** for upcoming tasks
+- **Fully Testable Endpoints** using API clients like Postman
 
-Task creation, assignment, status updates
+---
 
-Automated reminders for upcoming tasks via email
+## System Requirements
 
-Fully testable endpoints through an API client (Postman)
+### User Roles & Permissions
 
-System Requirements
-User Roles & Permissions
-Role Permissions
-Admin Create users, assign roles, manage all tasks
-Manager Create tasks, assign tasks to users, update own tasks
-User View tasks assigned to them, update task status
+| Role   | Permissions                                                                 |
+|--------|-----------------------------------------------------------------------------|
+| Admin  | Create users, assign roles, manage all tasks                                 |
+| Manager| Create tasks, assign tasks to users, update own tasks                        |
+| User   | View tasks assigned to them, update task status                              |
 
-Task Management
+---
 
-Task fields: title, description, assignedTo, status, priority, dueDate, createdBy, createdAt
+### Task Model
 
-Role-based restrictions for create, update, delete
+Each task includes the following fields:
 
-Users can update only their assigned task status
+- `title` (String) – Task title
+- `description` (String) – Task details
+- `assignedTo` (User ID) – User assigned to the task
+- `status` (String) – e.g., Pending, In Progress, Completed
+- `priority` (String) – e.g., Low, Medium, High
+- `dueDate` (Date) – Deadline for task completion
+- `createdBy` (User ID) – Task creator
+- `createdAt` (Date) – Task creation timestamp
 
-Setup Instructions:
+### Role-Based Restrictions
 
-1. Clone Repository
-2. Install Dependencies
-3. Configure Environment Variables
-4. Start the Server
+- Admin: Full access to all tasks and user management
+- Manager: Can create tasks, assign tasks to users, and update tasks they created
+- User: Can only update the status of tasks assigned to them
+
+---
+
+## Setup Instructions
+
+1. **Clone the repository**
+
+```bash
+git clone <repository_url>
+cd <repository_folder>
